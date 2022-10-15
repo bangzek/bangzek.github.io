@@ -38,26 +38,26 @@ li { }
     </td>
     <td style="background-color: #FFFFFF;">1 bit
     </td>
-    <td style="background-color: #FFFFFF;">00001-09999
+    <td style="background-color: #C0FFFF;">00001-09999
     </td>
     <td style="background-color: #FFFFFF;">
       <table style="border-width: 2pt; font-size: 11pt;">
       <tr valign=top>
       <td style="background-color: #FFFFFF;">1
       </td>
-      <td style="background-color: #FFFFFF;">Read Coils
+      <td style="background-color: #FFFFC0;">Read Coils
       </td>
       </tr>
       <tr valign=top>
       <td style="background-color: #FFFFFF;">5
       </td>
-      <td style="background-color: #FFFFFF;">Write Single Coils
+      <td style="background-color: #FFFFC0;">Write Single Coils
       </td>
       </tr>
       <tr valign=top>
       <td style="background-color: #FFFFFF;">15
       </td>
-      <td style="background-color: #FFFFFF;">Write Multiple Coils
+      <td style="background-color: #FFFFC0;">Write Multiple Coils
       </td>
       </tr>
       </table>
@@ -70,14 +70,14 @@ li { }
     </td>
     <td style="background-color: #FFFFFF;">1 bit
     </td>
-    <td style="background-color: #FFFFFF;">10001-19999
+    <td style="background-color: #C0FFFF;">10001-19999
     </td>
     <td style="background-color: #FFFFFF;">
       <table style="border-width: 2pt; font-size: 11pt;">
       <tr valign=top>
       <td style="background-color: #FFFFFF;">2
       </td>
-      <td style="background-color: #FFFFFF;">Read Discrete Inputs
+      <td style="background-color: #FFFFC0;">Read Discrete Inputs
       </td>
       </tr>
       </table>
@@ -90,14 +90,14 @@ li { }
     </td>
     <td style="background-color: #FFFFFF;">16 bits
     </td>
-    <td style="background-color: #FFFFFF;">30001-39999
+    <td style="background-color: #C0FFFF;">30001-39999
     </td>
     <td style="background-color: #FFFFFF;">
       <table style="border-width: 2pt; font-size: 11pt;">
       <tr valign=top>
       <td style="background-color: #FFFFFF;">4
       </td>
-      <td style="background-color: #FFFFFF;">Read Input Registers
+      <td style="background-color: #FFFFC0;">Read Input Registers
       </td>
       </tr>
       </table>
@@ -110,26 +110,26 @@ li { }
     </td>
     <td style="background-color: #FFFFFF;">16 bits
     </td>
-    <td style="background-color: #FFFFFF;">40001-49999
+    <td style="background-color: #C0FFFF;">40001-49999
     </td>
     <td style="background-color: #FFFFFF;">
       <table style="border-width: 2pt; font-size: 11pt;">
       <tr valign=top>
       <td style="background-color: #FFFFFF;">3
       </td>
-      <td style="background-color: #FFFFFF;">Read Holding Registers
+      <td style="background-color: #FFFFC0;">Read Holding Registers
       </td>
       </tr>
       <tr valign=top>
       <td style="background-color: #FFFFFF;">6
       </td>
-      <td style="background-color: #FFFFFF;">Write Single Holding Register
+      <td style="background-color: #FFFFC0;">Write Single Holding Register
       </td>
       </tr>
       <tr valign=top>
       <td style="background-color: #FFFFFF;">16
       </td>
-      <td style="background-color: #FFFFFF;">Write Multiple Holding Register
+      <td style="background-color: #FFFFC0;">Write Multiple Holding Register
       </td>
       </tr>
       </table>
@@ -246,7 +246,7 @@ li { }
   <td style="font-weight: bold;background-color: #FFFFFF;">Data Encoding
     <table style="border-width: 2pt; font-size: 12pt;">
     <tr valign=top>
-    <td style="font-weight: bold;background-color: #E8E8E8;">Register (16 bits)
+    <td style="font-weight: bold;background-color: #E8E8E8;">Address, Length, Register (16 bits)
     </td>
     <td style="background-color: #FFFFFF;">Big Endian (higher byte sent first)
     </td>
@@ -261,11 +261,11 @@ li { }
       </td>
       </tr>
       <tr valign=top>
-      <td style="background-color: #FFFFFF;">0x1234
+      <td style="background-color: #FFFFC0;">0x1234
       </td>
-      <td style="background-color: #FFFFFF;">0x12
+      <td style="background-color: #FFFFC0;">0x12
       </td>
-      <td style="background-color: #FFFFFF;">0x34
+      <td style="background-color: #FFFFC0;">0x34
       </td>
       </tr>
       </table>
@@ -274,7 +274,7 @@ li { }
     <tr valign=top>
     <td style="font-weight: bold;background-color: #E8E8E8;">bit(s)
     </td>
-    <td style="background-color: #FFFFFF;">Packed into 8 bits per byte with normal LSB at bit 0 but the first byte is sent first
+    <td style="background-color: #FFFFFF;">Packed into    8 bits per byte with normal LSB at bit 0 but the first byte is sent first
     </td>
     <td style="background-color: #FFFFFF;">
       <table style="border-width: 2pt; font-size: 11pt;">
@@ -1356,15 +1356,17 @@ li { }
         <tr valign=top>
         <td style="background-color: #E8E8E8;">devAddr
         </td>
-        <td style="background-color: #E8E8E8;">addr
-        </td>
-        <td style="background-color: #E8E8E8;">count
+        <td style="background-color: #FFFFFF;">int
         </td>
         </tr>
         <tr valign=top>
-        <td style="background-color: #FFFFFF;">int
+        <td style="background-color: #E8E8E8;">addr
         </td>
         <td style="background-color: #FFFFFF;">int
+        </td>
+        </tr>
+        <tr valign=top>
+        <td style="background-color: #E8E8E8;">count
         </td>
         <td style="background-color: #FFFFFF;">int
         </td>
@@ -1376,6 +1378,8 @@ li { }
         <tr valign=top>
         <td style="background-color: #FFFFFF;">[]bool
         </td>
+        </tr>
+        <tr valign=top>
         <td style="background-color: #FFFFFF;">error
         </td>
         </tr>
@@ -1392,15 +1396,17 @@ li { }
         <tr valign=top>
         <td style="background-color: #E8E8E8;">devAddr
         </td>
-        <td style="background-color: #E8E8E8;">addr
-        </td>
-        <td style="background-color: #E8E8E8;">count
+        <td style="background-color: #FFFFFF;">int
         </td>
         </tr>
         <tr valign=top>
-        <td style="background-color: #FFFFFF;">int
+        <td style="background-color: #E8E8E8;">addr
         </td>
         <td style="background-color: #FFFFFF;">int
+        </td>
+        </tr>
+        <tr valign=top>
+        <td style="background-color: #E8E8E8;">count
         </td>
         <td style="background-color: #FFFFFF;">int
         </td>
@@ -1412,6 +1418,8 @@ li { }
         <tr valign=top>
         <td style="background-color: #FFFFFF;">[]bool
         </td>
+        </tr>
+        <tr valign=top>
         <td style="background-color: #FFFFFF;">error
         </td>
         </tr>
@@ -1428,15 +1436,17 @@ li { }
         <tr valign=top>
         <td style="background-color: #E8E8E8;">devAddr
         </td>
-        <td style="background-color: #E8E8E8;">addr
-        </td>
-        <td style="background-color: #E8E8E8;">count
+        <td style="background-color: #FFFFFF;">int
         </td>
         </tr>
         <tr valign=top>
-        <td style="background-color: #FFFFFF;">int
+        <td style="background-color: #E8E8E8;">addr
         </td>
         <td style="background-color: #FFFFFF;">int
+        </td>
+        </tr>
+        <tr valign=top>
+        <td style="background-color: #E8E8E8;">count
         </td>
         <td style="background-color: #FFFFFF;">int
         </td>
@@ -1448,6 +1458,8 @@ li { }
         <tr valign=top>
         <td style="background-color: #FFFFFF;">[]uint16
         </td>
+        </tr>
+        <tr valign=top>
         <td style="background-color: #FFFFFF;">error
         </td>
         </tr>
@@ -1464,15 +1476,17 @@ li { }
         <tr valign=top>
         <td style="background-color: #E8E8E8;">devAddr
         </td>
-        <td style="background-color: #E8E8E8;">addr
-        </td>
-        <td style="background-color: #E8E8E8;">count
+        <td style="background-color: #FFFFFF;">int
         </td>
         </tr>
         <tr valign=top>
-        <td style="background-color: #FFFFFF;">int
+        <td style="background-color: #E8E8E8;">addr
         </td>
         <td style="background-color: #FFFFFF;">int
+        </td>
+        </tr>
+        <tr valign=top>
+        <td style="background-color: #E8E8E8;">count
         </td>
         <td style="background-color: #FFFFFF;">int
         </td>
@@ -1484,6 +1498,8 @@ li { }
         <tr valign=top>
         <td style="background-color: #FFFFFF;">[]uint16
         </td>
+        </tr>
+        <tr valign=top>
         <td style="background-color: #FFFFFF;">error
         </td>
         </tr>
@@ -1500,15 +1516,17 @@ li { }
         <tr valign=top>
         <td style="background-color: #E8E8E8;">devAddr
         </td>
-        <td style="background-color: #E8E8E8;">addr
-        </td>
-        <td style="background-color: #E8E8E8;">val
+        <td style="background-color: #FFFFFF;">int
         </td>
         </tr>
         <tr valign=top>
-        <td style="background-color: #FFFFFF;">int
+        <td style="background-color: #E8E8E8;">addr
         </td>
         <td style="background-color: #FFFFFF;">int
+        </td>
+        </tr>
+        <tr valign=top>
+        <td style="background-color: #E8E8E8;">val
         </td>
         <td style="background-color: #FFFFFF;">bool
         </td>
@@ -1528,15 +1546,17 @@ li { }
         <tr valign=top>
         <td style="background-color: #E8E8E8;">devAddr
         </td>
-        <td style="background-color: #E8E8E8;">addr
-        </td>
-        <td style="background-color: #E8E8E8;">val
+        <td style="background-color: #FFFFFF;">int
         </td>
         </tr>
         <tr valign=top>
-        <td style="background-color: #FFFFFF;">int
+        <td style="background-color: #E8E8E8;">addr
         </td>
         <td style="background-color: #FFFFFF;">int
+        </td>
+        </tr>
+        <tr valign=top>
+        <td style="background-color: #E8E8E8;">val
         </td>
         <td style="background-color: #FFFFFF;">uint16
         </td>
@@ -1556,15 +1576,17 @@ li { }
         <tr valign=top>
         <td style="background-color: #E8E8E8;">devAddr
         </td>
-        <td style="background-color: #E8E8E8;">addr
-        </td>
-        <td style="background-color: #E8E8E8;">values
+        <td style="background-color: #FFFFFF;">int
         </td>
         </tr>
         <tr valign=top>
-        <td style="background-color: #FFFFFF;">int
+        <td style="background-color: #E8E8E8;">addr
         </td>
         <td style="background-color: #FFFFFF;">int
+        </td>
+        </tr>
+        <tr valign=top>
+        <td style="background-color: #E8E8E8;">values
         </td>
         <td style="background-color: #FFFFFF;">[]bool
         </td>
@@ -1584,15 +1606,17 @@ li { }
         <tr valign=top>
         <td style="background-color: #E8E8E8;">devAddr
         </td>
-        <td style="background-color: #E8E8E8;">addr
-        </td>
-        <td style="background-color: #E8E8E8;">values
+        <td style="background-color: #FFFFFF;">int
         </td>
         </tr>
         <tr valign=top>
-        <td style="background-color: #FFFFFF;">int
+        <td style="background-color: #E8E8E8;">addr
         </td>
         <td style="background-color: #FFFFFF;">int
+        </td>
+        </tr>
+        <tr valign=top>
+        <td style="background-color: #E8E8E8;">values
         </td>
         <td style="background-color: #FFFFFF;">[]uint16
         </td>
@@ -1669,6 +1693,8 @@ li { }
             </tr>
             </table>
           </td>
+          </tr>
+          <tr valign=top>
           <td style="background-color: #FFFFFF;">Range
             <table style="border-width: 2pt; font-size: 8pt;">
             <tr valign=top>
@@ -1731,79 +1757,123 @@ li { }
         </tr>
         </table>
       </td>
-      <td style="background-color: #FFFFFF;">
+      <td style="background-color: #FFFFFF;">&lt;-chan Event
         <table style="border-width: 2pt; font-size: 10pt;">
         <tr valign=top>
-        <td style="background-color: #FFFFFF;">&lt;-chan Event
+        <td style="background-color: #C0FFC0;">Event
           <table style="border-width: 2pt; font-size: 9pt;">
           <tr valign=top>
-          <td style="background-color: #C0FFC0;">Event
+          <td style="font-weight: bold;font-style: italic;background-color: #FFFFFF;">Implementor
             <table style="border-width: 2pt; font-size: 8pt;">
             <tr valign=top>
-            <td style="font-weight: bold;font-style: italic;background-color: #FFFFFF;">Implementor
+            <td style="background-color: #C0FFC0;">ReadCoilsEvent
               <table style="border-width: 2pt; font-size: 7pt;">
               <tr valign=top>
-              <td style="background-color: #C0FFC0;">ReadCoilsEvent
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Count
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Ch
+              </td>
+              <td style="background-color: #FFFFFF;">chan&lt;- ReadBitsResult
                 <table style="border-width: 2pt; font-size: 6pt;">
                 <tr valign=top>
-                <td style="background-color: #E8E8E8;">Addr
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Count
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Ch
-                </td>
-                <td style="background-color: #FFFFFF;">chan&lt;- ReadBitsResult
+                <td style="background-color: #C0FFC0;">ReadBitsResult
                   <table style="border-width: 2pt; font-size: 5pt;">
                   <tr valign=top>
-                  <td style="background-color: #C0FFC0;">ReadBitsResult
+                  <td style="background-color: #E8E8E8;">Bits
+                  </td>
+                  <td style="background-color: #FFFFFF;">[]bool
+                  </td>
+                  </tr>
+                  <tr valign=top>
+                  <td style="background-color: #E8E8E8;">Err
+                  </td>
+                  <td style="background-color: #C0FFC0;">ModbusError
                     <table style="border-width: 2pt; font-size: 4pt;">
                     <tr valign=top>
-                    <td style="background-color: #E8E8E8;">Bits
+                    <td style="background-color: #E8E8E8;">0
                     </td>
-                    <td style="background-color: #FFFFFF;">[]bool
+                    <td style="background-color: #FFFFC0;">NoError
                     </td>
                     </tr>
                     <tr valign=top>
-                    <td style="background-color: #E8E8E8;">Err
+                    <td style="background-color: #E8E8E8;">1
                     </td>
-                    <td style="background-color: #C0FFC0;">ModbusError
+                    <td style="background-color: #FFFFC0;">IllegalFunction
+                    </td>
+                    </tr>
+                    <tr valign=top>
+                    <td style="background-color: #E8E8E8;">2
+                    </td>
+                    <td style="background-color: #FFFFC0;">IllegalDataAddress
+                    </td>
+                    </tr>
+                    <tr valign=top>
+                    <td style="background-color: #E8E8E8;">3
+                    </td>
+                    <td style="background-color: #FFFFC0;">IllegalDataValue
+                    </td>
+                    </tr>
+                    <tr valign=top>
+                    <td style="background-color: #E8E8E8;">4
+                    </td>
+                    <td style="background-color: #FFFFC0;">SlaveDeviceFailure
+                    </td>
+                    </tr>
+                    </table>
+                  </td>
+                  </tr>
+                  </table>
+                </td>
+                </tr>
+                <tr valign=top>
+                <td style="font-weight: bold;background-color: #FFFFFF;">Notes
+                  <table style="border-width: 2pt; font-size: 5pt;">
+                  <tr valign=top>
+                  <td style="font-weight: bold;background-color: #FFFFFF;">If
+                    <table style="border-width: 2pt; font-size: 4pt;">
+                    <tr valign=top>
+                    <td style="background-color: #FFFFFF;">Err
                       <table style="border-width: 2pt; font-size: 3pt;">
                       <tr valign=top>
-                      <td style="background-color: #E8E8E8;">0
-                      </td>
-                      <td style="background-color: #FFFFC0;">NoError
-                      </td>
-                      </tr>
-                      <tr valign=top>
-                      <td style="background-color: #E8E8E8;">1
-                      </td>
-                      <td style="background-color: #FFFFC0;">IllegalFunction
+                      <td style="background-color: #FFFFFF;">==
+                        <table style="border-width: 2pt; font-size: 2pt;">
+                        <tr valign=top>
+                        <td style="background-color: #FFFFFF;">NoError
+                        </td>
+                        </tr>
+                        </table>
                       </td>
                       </tr>
+                      </table>
+                    </td>
+                    </tr>
+                    <tr valign=top>
+                    <td style="font-weight: bold;background-color: #FFFFFF;">then
+                      <table style="border-width: 2pt; font-size: 3pt;">
                       <tr valign=top>
-                      <td style="background-color: #E8E8E8;">2
-                      </td>
-                      <td style="background-color: #FFFFC0;">IllegalDataAddress
-                      </td>
-                      </tr>
-                      <tr valign=top>
-                      <td style="background-color: #E8E8E8;">3
-                      </td>
-                      <td style="background-color: #FFFFC0;">IllegalDataValue
-                      </td>
-                      </tr>
-                      <tr valign=top>
-                      <td style="background-color: #E8E8E8;">4
-                      </td>
-                      <td style="background-color: #FFFFC0;">SlaveDeviceFailure
+                      <td style="background-color: #FFFFFF;">Bits length
+                        <table style="border-width: 2pt; font-size: 2pt;">
+                        <tr valign=top>
+                        <td style="background-color: #FFFFFF;">==
+                          <table style="border-width: 2pt; font-size: 1pt;">
+                          <tr valign=top>
+                          <td style="background-color: #FFFFFF;">Count
+                          </td>
+                          </tr>
+                          </table>
+                        </td>
+                        </tr>
+                        </table>
                       </td>
                       </tr>
                       </table>
@@ -1811,212 +1881,8 @@ li { }
                     </tr>
                     </table>
                   </td>
-                  <td style="font-weight: bold;background-color: #FFFFFF;">Notes
-                    <table style="border-width: 2pt; font-size: 4pt;">
-                    <tr valign=top>
-                    <td style="background-color: #FFFFFF;">If Err is NoError then Bits slice must have Count length
-                    </td>
-                    </tr>
-                    </table>
-                  </td>
                   </tr>
                   </table>
-                </td>
-                </tr>
-                </table>
-              </td>
-              </tr>
-              <tr valign=top>
-              <td style="background-color: #C0FFC0;">ReadDInputsEvent
-                <table style="border-width: 2pt; font-size: 6pt;">
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Addr
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Count
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Ch
-                </td>
-                <td style="background-color: #FFFFFF;">chan&lt;- ReadBitsResult
-                </td>
-                </tr>
-                </table>
-              </td>
-              </tr>
-              <tr valign=top>
-              <td style="background-color: #C0FFC0;">ReadIRegsEvent
-                <table style="border-width: 2pt; font-size: 6pt;">
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Addr
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Count
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Ch
-                </td>
-                <td style="background-color: #FFFFFF;">chan&lt;- ReadRegsResult
-                  <table style="border-width: 2pt; font-size: 5pt;">
-                  <tr valign=top>
-                  <td style="background-color: #C0FFC0;">ReadRegsResult
-                    <table style="border-width: 2pt; font-size: 4pt;">
-                    <tr valign=top>
-                    <td style="background-color: #E8E8E8;">Regs
-                    </td>
-                    <td style="background-color: #FFFFFF;">[]bool
-                    </td>
-                    </tr>
-                    <tr valign=top>
-                    <td style="background-color: #E8E8E8;">Err
-                    </td>
-                    <td style="background-color: #FFFFFF;">ModbusError
-                    </td>
-                    </tr>
-                    </table>
-                  </td>
-                  <td style="font-weight: bold;background-color: #FFFFFF;">Notes
-                    <table style="border-width: 2pt; font-size: 4pt;">
-                    <tr valign=top>
-                    <td style="background-color: #FFFFFF;">If Err is NoError then Regs slice must have Count length
-                    </td>
-                    </tr>
-                    </table>
-                  </td>
-                  </tr>
-                  </table>
-                </td>
-                </tr>
-                </table>
-              </td>
-              </tr>
-              <tr valign=top>
-              <td style="background-color: #C0FFC0;">ReadHRegsEvent
-                <table style="border-width: 2pt; font-size: 6pt;">
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Addr
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Count
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Ch
-                </td>
-                <td style="background-color: #FFFFFF;">chan&lt;- ReadRegsResult
-                </td>
-                </tr>
-                </table>
-              </td>
-              </tr>
-              <tr valign=top>
-              <td style="background-color: #C0FFC0;">WriteCoilEvent
-                <table style="border-width: 2pt; font-size: 6pt;">
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Addr
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Value
-                </td>
-                <td style="background-color: #FFFFFF;">bool
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Ch
-                </td>
-                <td style="background-color: #FFFFFF;">chan&lt;- ModbusError
-                </td>
-                </tr>
-                </table>
-              </td>
-              </tr>
-              <tr valign=top>
-              <td style="background-color: #C0FFC0;">WriteRegEvent
-                <table style="border-width: 2pt; font-size: 6pt;">
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Addr
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Value
-                </td>
-                <td style="background-color: #FFFFFF;">uint16
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Ch
-                </td>
-                <td style="background-color: #FFFFFF;">chan&lt;- ModbusError
-                </td>
-                </tr>
-                </table>
-              </td>
-              </tr>
-              <tr valign=top>
-              <td style="background-color: #C0FFC0;">WriteCoilsEvent
-                <table style="border-width: 2pt; font-size: 6pt;">
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Addr
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Values
-                </td>
-                <td style="background-color: #FFFFFF;">[]bool
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Ch
-                </td>
-                <td style="background-color: #FFFFFF;">chan&lt;- ModbusError
-                </td>
-                </tr>
-                </table>
-              </td>
-              </tr>
-              <tr valign=top>
-              <td style="background-color: #C0FFC0;">WriteRegsEvent
-                <table style="border-width: 2pt; font-size: 6pt;">
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Addr
-                </td>
-                <td style="background-color: #FFFFFF;">int
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Values
-                </td>
-                <td style="background-color: #FFFFFF;">[]uint16
-                </td>
-                </tr>
-                <tr valign=top>
-                <td style="background-color: #E8E8E8;">Ch
-                </td>
-                <td style="background-color: #FFFFFF;">chan&lt;- ModbusError
                 </td>
                 </tr>
                 </table>
@@ -2024,28 +1890,344 @@ li { }
               </tr>
               </table>
             </td>
-            <td style="font-weight: bold;font-style: italic;background-color: #FFFFFF;">Interface
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">ReadDInputsEvent
               <table style="border-width: 2pt; font-size: 7pt;">
               <tr valign=top>
-              <td style="background-color: #E8E8E8;">Event()
+              <td style="background-color: #E8E8E8;">Addr
               </td>
-              <td style="background-color: #FFFFFF;">string
-              </td>
-              <td style="background-color: #FFFFFF;">
+              <td style="background-color: #FFFFFF;">int
               </td>
               </tr>
               <tr valign=top>
-              <td style="background-color: #E8E8E8;">tag()
+              <td style="background-color: #E8E8E8;">Count
               </td>
-              <td style="background-color: #FFFFFF;">
+              <td style="background-color: #FFFFFF;">int
               </td>
-              <td style="font-style: italic;background-color: #FFFFFF;">to make it private interface
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Ch
+              </td>
+              <td style="background-color: #FFFFFF;">chan&lt;- ReadBitsResult
+              </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">ReadIRegsEvent
+              <table style="border-width: 2pt; font-size: 7pt;">
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Count
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Ch
+              </td>
+              <td style="background-color: #FFFFFF;">chan&lt;- ReadRegsResult
+                <table style="border-width: 2pt; font-size: 6pt;">
+                <tr valign=top>
+                <td style="background-color: #C0FFC0;">ReadRegsResult
+                  <table style="border-width: 2pt; font-size: 5pt;">
+                  <tr valign=top>
+                  <td style="background-color: #E8E8E8;">Regs
+                  </td>
+                  <td style="background-color: #FFFFFF;">[]bool
+                  </td>
+                  </tr>
+                  <tr valign=top>
+                  <td style="background-color: #E8E8E8;">Err
+                  </td>
+                  <td style="background-color: #FFFFFF;">ModbusError
+                  </td>
+                  </tr>
+                  </table>
+                </td>
+                </tr>
+                <tr valign=top>
+                <td style="font-weight: bold;background-color: #FFFFFF;">Notes
+                  <table style="border-width: 2pt; font-size: 5pt;">
+                  <tr valign=top>
+                  <td style="font-weight: bold;background-color: #FFFFFF;">If
+                    <table style="border-width: 2pt; font-size: 4pt;">
+                    <tr valign=top>
+                    <td style="background-color: #FFFFFF;">Err
+                      <table style="border-width: 2pt; font-size: 3pt;">
+                      <tr valign=top>
+                      <td style="background-color: #FFFFFF;">==
+                        <table style="border-width: 2pt; font-size: 2pt;">
+                        <tr valign=top>
+                        <td style="background-color: #FFFFFF;">NoError
+                        </td>
+                        </tr>
+                        </table>
+                      </td>
+                      </tr>
+                      </table>
+                    </td>
+                    </tr>
+                    <tr valign=top>
+                    <td style="font-weight: bold;background-color: #FFFFFF;">then
+                      <table style="border-width: 2pt; font-size: 3pt;">
+                      <tr valign=top>
+                      <td style="background-color: #FFFFFF;">Regs length
+                        <table style="border-width: 2pt; font-size: 2pt;">
+                        <tr valign=top>
+                        <td style="background-color: #FFFFFF;">==
+                          <table style="border-width: 2pt; font-size: 1pt;">
+                          <tr valign=top>
+                          <td style="background-color: #FFFFFF;">Count
+                          </td>
+                          </tr>
+                          </table>
+                        </td>
+                        </tr>
+                        </table>
+                      </td>
+                      </tr>
+                      </table>
+                    </td>
+                    </tr>
+                    </table>
+                  </td>
+                  </tr>
+                  </table>
+                </td>
+                </tr>
+                </table>
+              </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">ReadHRegsEvent
+              <table style="border-width: 2pt; font-size: 7pt;">
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Count
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Ch
+              </td>
+              <td style="background-color: #FFFFFF;">chan&lt;- ReadRegsResult
+              </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">WriteCoilEvent
+              <table style="border-width: 2pt; font-size: 7pt;">
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Value
+              </td>
+              <td style="background-color: #FFFFFF;">bool
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Ch
+              </td>
+              <td style="background-color: #FFFFFF;">chan&lt;- ModbusError
+              </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">WriteRegEvent
+              <table style="border-width: 2pt; font-size: 7pt;">
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Value
+              </td>
+              <td style="background-color: #FFFFFF;">uint16
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Ch
+              </td>
+              <td style="background-color: #FFFFFF;">chan&lt;- ModbusError
+              </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">WriteCoilsEvent
+              <table style="border-width: 2pt; font-size: 7pt;">
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Values
+              </td>
+              <td style="background-color: #FFFFFF;">[]bool
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Ch
+              </td>
+              <td style="background-color: #FFFFFF;">chan&lt;- ModbusError
+              </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">WriteRegsEvent
+              <table style="border-width: 2pt; font-size: 7pt;">
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Values
+              </td>
+              <td style="background-color: #FFFFFF;">[]uint16
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Ch
+              </td>
+              <td style="background-color: #FFFFFF;">chan&lt;- ModbusError
+              </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">BroadcastWriteCoilEvent
+              <table style="border-width: 2pt; font-size: 7pt;">
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Value
+              </td>
+              <td style="background-color: #FFFFFF;">bool
+              </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">BroadcastWriteRegEvent
+              <table style="border-width: 2pt; font-size: 7pt;">
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Value
+              </td>
+              <td style="background-color: #FFFFFF;">uint16
+              </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">BroadcastWriteCoilsEvent
+              <table style="border-width: 2pt; font-size: 7pt;">
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Values
+              </td>
+              <td style="background-color: #FFFFFF;">[]bool
+              </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #C0FFC0;">BroadcastWriteRegsEvent
+              <table style="border-width: 2pt; font-size: 7pt;">
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Addr
+              </td>
+              <td style="background-color: #FFFFFF;">int
+              </td>
+              </tr>
+              <tr valign=top>
+              <td style="background-color: #E8E8E8;">Values
+              </td>
+              <td style="background-color: #FFFFFF;">[]uint16
               </td>
               </tr>
               </table>
             </td>
             </tr>
             </table>
+          </td>
+          </tr>
+          <tr valign=top>
+          <td style="font-weight: bold;font-style: italic;background-color: #FFFFFF;">Interface
+            <table style="border-width: 2pt; font-size: 8pt;">
+            <tr valign=top>
+            <td style="background-color: #E8E8E8;">Event()
+            </td>
+            <td style="background-color: #FFFFFF;">string
+            </td>
+            <td style="background-color: #FFFFFF;">
+            </td>
+            </tr>
+            <tr valign=top>
+            <td style="background-color: #E8E8E8;">tag()
+            </td>
+            <td style="background-color: #FFFFFF;">
+            </td>
+            <td style="font-style: italic;background-color: #FFFFFF;">to make it private interface
+            </td>
+            </tr>
+            </table>
+          </td>
+          </tr>
+          <tr valign=top>
+          <td style="font-weight: bold;font-style: italic;background-color: #FFFFFF;">
           </td>
           </tr>
           </table>
