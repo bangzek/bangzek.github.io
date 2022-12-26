@@ -1,0 +1,795 @@
+digraph ggp_lamp_v2 {
+  ranksep=1
+  ordering="out"
+  mclimit=3.0
+  searchsize=25
+  label="GGP Lamp v2"
+  labelloc="t"
+  fontname="Times,Times New Roman,serif"
+  fontsize=40
+  ratio="auto"
+  size="11.7,8.3!"
+  center=true
+  margin=0
+  pad=1
+  node [fontname="Helvetica,Arial,sans-serif"]
+  edge [fontname="Helvetica,Arial,sans-serif"]
+  subgraph cluster_SHIFT {
+    label="ON SHIFT"
+    bgcolor=azure
+    margin=16
+    SHIFT;
+    {
+      rank="same"
+      QR; CARD; WAIT_1; WAIT_2;
+    }
+    {
+      rank="same"
+      QR_CARD;
+      QR_1; QR_2;
+      CARD_1; CARD_2;
+      WAIT;
+    }
+    {
+      rank="same"
+      AUTH_1; AUTH_2;
+      QR_BOTH; CARD_BOTH;
+    }
+    AUTH;
+    {
+      rank="same"
+      "AUTH_1\nQR"; "AUTH_2\nQR";
+      "AUTH_1\nCARD"; "AUTH_2\nCARD";
+      "AUTH_1\nWAIT_2"; "AUTH_2\nWAIT_1";
+    }
+    {
+      rank="same"
+      "AUTH_1\nQR_CARD"; "AUTH_2\nQR_CARD";
+    }
+    {
+      rank="same"
+      "AUTH_1\nQR_2"; "AUTH_2\nQR_1";
+      "AUTH_1\nCARD_2"; "AUTH_2\nCARD_1";
+    }
+  }
+
+  subgraph cluster_UNSHIFT_1 {
+    label="OFF SHIFT"
+    bgcolor=ivory
+    margin=16
+    BLANK;
+    {
+      rank="same"
+      "UNSHIFT\nQR"; "UNSHIFT\nCARD"; "UNSHIFT\nWAIT_1"; "UNSHIFT\nWAIT_2";
+    }
+    {
+      rank="same"
+      "UNSHIFT\nQR_CARD"; "UNSHIFT\nWAIT";
+      "UNSHIFT\nQR_1"; "UNSHIFT\nQR_2";
+      "UNSHIFT\nCARD_1"; "UNSHIFT\nCARD_2";
+    }
+    {
+      rank="same"
+      "UNSHIFT\nQR_CARD_1"; "UNSHIFT\nQR_CARD_2";
+      "UNSHIFT\nQR_BOTH"; "UNSHIFT\nCARD_BOTH";
+    }
+    {
+      rank="same"
+      "UNSHIFT\nQR_CARD_BOTH";
+      "UNSHIFT\nAUTH";
+    }
+    {
+      rank="same"
+      "UNSHIFT\nAUTH_1"; "UNSHIFT\nAUTH_2";
+    }
+    {
+      rank="same"
+      "UNSHIFT\nAUTH_1\nQR"; "UNSHIFT\nAUTH_2\nQR";
+      "UNSHIFT\nAUTH_1\nCARD"; "UNSHIFT\nAUTH_2\nCARD";
+      "UNSHIFT\nAUTH_1\nWAIT_2"; "UNSHIFT\nAUTH_2\nWAIT_1";
+    }
+    {
+      rank="same"
+      "UNSHIFT\nAUTH_1\nQR_2"; "UNSHIFT\nAUTH_2\nQR_1";
+      "UNSHIFT\nAUTH_1\nCARD_2"; "UNSHIFT\nAUTH_2\nCARD_1";
+    }
+    {
+      rank="same"
+      "UNSHIFT\nAUTH_1\nQR_CARD"; "UNSHIFT\nAUTH_2\nQR_CARD";
+    }
+    {
+      rank="same"
+      "UNSHIFT\nAUTH_1\nQR_CARD_2"; "UNSHIFT\nAUTH_2\nQR_CARD_1";
+    }
+  }
+
+
+  STARTUP->BLANK              [label="timer"];
+  STARTUP->SHIFT              [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  STARTUP->"UNSHIFT\nQR"      [label="scan\non" weight=3
+			color="blue" fontcolor="blue"];
+  STARTUP->"UNSHIFT\nCARD"    [label="usr\non" weight=3
+			color="#04672b" fontcolor="#04672b"];
+  STARTUP->"UNSHIFT\nWAIT_1"  [label="call\n1" weight=6];
+  STARTUP->"UNSHIFT\nWAIT_2"  [label="call\n2" weight=6];
+
+
+  BLANK->SHIFT              [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  BLANK->"UNSHIFT\nQR"      [label="scan\non"
+			color="blue" fontcolor="blue"];
+  BLANK->"UNSHIFT\nCARD"    [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  BLANK->"UNSHIFT\nWAIT_1"  [label="call\n1"];
+  BLANK->"UNSHIFT\nWAIT_2"  [label="call\n2"];
+
+
+  SHIFT->BLANK    [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  SHIFT->QR       [label="scan\non"
+			color="blue" fontcolor="blue"];
+  SHIFT->CARD     [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  SHIFT->WAIT_1   [label="call\n1"];
+  SHIFT->WAIT_2   [label="call\n2"];
+
+
+  QR->BLANK     [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  QR->SHIFT     [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  QR->QR_CARD   [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  QR->QR_1      [label="call\n1"];
+  QR->QR_2      [label="call\n2"];
+
+
+  CARD->BLANK     [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  CARD->QR_CARD   [label="scan\non"
+			color="blue" fontcolor="blue"];
+  CARD->SHIFT     [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  CARD->CARD_1    [label="call\n1"];
+  CARD->CARD_2    [label="call\n2"];
+
+
+  WAIT_1->"UNSHIFT\nWAIT_1" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  WAIT_1->QR_1              [label="scan\non"
+			color="blue" fontcolor="blue"];
+  WAIT_1->CARD_1            [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  WAIT_1->SHIFT             [label="off\n1"
+			style="dashed"];
+  WAIT_1->WAIT              [label="call\n2"];
+
+
+  WAIT_2->"UNSHIFT\nWAIT_2" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  WAIT_2->QR_2              [label="scan\non"
+			color="blue" fontcolor="blue"];
+  WAIT_2->CARD_2            [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  WAIT_2->WAIT              [label="call\n1"];
+  WAIT_2->SHIFT             [label="off\n2"
+			style="dashed"];
+
+
+  QR_CARD->BLANK    [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  QR_CARD->CARD     [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  QR_CARD->QR       [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  QR_CARD->AUTH_1   [label="call\n1"];
+  QR_CARD->AUTH_2   [label="call\n2"];
+
+
+  QR_1->"UNSHIFT\nWAIT_1" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  QR_1->WAIT_1            [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  QR_1->AUTH_1            [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  QR_1->QR                [label="off\n1"
+			style="dashed"];
+  QR_1->QR_BOTH           [label="call\n2"];
+
+
+  QR_2->"UNSHIFT\nWAIT_2"    [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  QR_2->WAIT_2            [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  QR_2->AUTH_2            [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  QR_2->QR_BOTH           [label="call\n1"];
+  QR_2->QR                [label="off\n2"
+			style="dashed"];
+
+
+  CARD_1->"UNSHIFT\nWAIT_1" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  CARD_1->AUTH_1            [label="scan\non"
+			color="blue" fontcolor="blue"];
+  CARD_1->WAIT_1            [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  CARD_1->CARD              [label="off\n1"
+			style="dashed"];
+  CARD_1->CARD_BOTH         [label="call\n2"];
+
+
+  CARD_2->"UNSHIFT\nWAIT_2" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  CARD_2->AUTH_2            [label="scan\non"
+			color="blue" fontcolor="blue"];
+  CARD_2->WAIT_2            [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  CARD_2->CARD_BOTH         [label="call\n1"];
+  CARD_2->CARD              [label="off\n2"
+			style="dashed"];
+
+
+  WAIT->"UNSHIFT\nWAIT" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  WAIT->QR_BOTH         [label="scan\non"
+			color="blue" fontcolor="blue"];
+  WAIT->CARD_BOTH       [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  WAIT->WAIT_1          [label="off\n1"
+			style="dashed"];
+  WAIT->WAIT_2          [label="off\n2"
+			style="dashed"];
+
+
+  AUTH_1->"UNSHIFT\nAUTH_1"   [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  AUTH_1->"AUTH_1\nQR"        [label="scan\non"
+			color="blue" fontcolor="blue"];
+  AUTH_1->"AUTH_1\nCARD"      [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  AUTH_1->SHIFT               [label="trans\n1"
+			style="dotted" penwidth=3];
+  AUTH_1->"AUTH_1\nWAIT_2"    [label="call\n2"];
+
+
+  AUTH_2->"UNSHIFT\nAUTH_2"   [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  AUTH_2->"AUTH_2\nQR"        [label="scan\non"
+			color="blue" fontcolor="blue"];
+  AUTH_2->"AUTH_2\nCARD"      [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  AUTH_2->"AUTH_2\nWAIT_1"    [label="call\n1"];
+  AUTH_2->SHIFT               [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  QR_BOTH->"UNSHIFT\nWAIT"   [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  QR_BOTH->WAIT           [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  QR_BOTH->"AUTH_1\nWAIT_2"  [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  QR_BOTH->QR_1           [label="off\n1"
+			style="dashed"];
+  QR_BOTH->QR_2           [label="off\n2"
+			style="dashed"];
+
+
+  CARD_BOTH->"UNSHIFT\nWAIT"  [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  CARD_BOTH->"AUTH_1\nWAIT_2" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  CARD_BOTH->WAIT             [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  CARD_BOTH->CARD_1           [label="off\n1"
+			style="dashed"];
+  CARD_BOTH->CARD_2           [label="off\n2"
+			style="dashed"];
+
+
+  "AUTH_1\nQR"->"UNSHIFT\nAUTH_1" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_1\nQR"->AUTH_1            [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "AUTH_1\nQR"->"AUTH_1\nQR_CARD" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "AUTH_1\nQR"->QR                [label="trans\n1"
+			style="dotted" penwidth=3];
+  "AUTH_1\nQR"->"AUTH_1\nQR_2"    [label="call\n2"];
+
+
+  "AUTH_2\nQR"->"UNSHIFT\nAUTH_2" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_2\nQR"->AUTH_2            [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+
+  "AUTH_2\nQR"->"AUTH_2\nQR_CARD" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "AUTH_2\nQR"->"AUTH_2\nQR_1"    [label="call\n1"];
+  "AUTH_2\nQR"->QR                [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "AUTH_1\nCARD"->"UNSHIFT\nAUTH_1" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_1\nCARD"->"AUTH_1\nQR_CARD" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "AUTH_1\nCARD"->AUTH_1            [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "AUTH_1\nCARD"->CARD              [label="trans\n1"
+			style="dotted" penwidth=3];
+  "AUTH_1\nCARD"->"AUTH_1\nCARD_2"  [label="call\n2"];
+
+
+  "AUTH_2\nCARD"->"UNSHIFT\nAUTH_2" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_2\nCARD"->"AUTH_2\nQR_CARD" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "AUTH_2\nCARD"->AUTH_2            [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "AUTH_2\nCARD"->"AUTH_2\nCARD_1"  [label="call\n1"];
+  "AUTH_2\nCARD"->CARD              [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "AUTH_1\nWAIT_2"->"UNSHIFT\nAUTH_1\nWAIT_2" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_1\nWAIT_2"->"AUTH_1\nQR_2"            [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "AUTH_1\nWAIT_2"->"AUTH_1\nCARD_2"          [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "AUTH_1\nWAIT_2"->WAIT_2                    [label="trans\n1"
+			style="dotted" penwidth=3];
+  "AUTH_1\nWAIT_2"->AUTH_1                    [label="off\n2"
+			style="dashed"];
+
+
+  "AUTH_2\nWAIT_1"->"UNSHIFT\nAUTH_2\nWAIT_1" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_2\nWAIT_1"->"AUTH_2\nQR_1"            [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "AUTH_2\nWAIT_1"->"AUTH_2\nCARD_1"          [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "AUTH_2\nWAIT_1"->AUTH_2                    [label="off\n1"
+			style="dashed"];
+  "AUTH_2\nWAIT_1"->WAIT_1                    [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "AUTH_1\nQR_CARD"->"UNSHIFT\nAUTH_1"  [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_1\nQR_CARD"->"AUTH_1\nCARD"     [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "AUTH_1\nQR_CARD"->"AUTH_1\nQR"       [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "AUTH_1\nQR_CARD"->QR_CARD            [label="trans\n1"
+			style="dotted" penwidth=3];
+  "AUTH_1\nQR_CARD"->AUTH               [label="call\n2"];
+
+
+  "AUTH_2\nQR_CARD"->"UNSHIFT\nAUTH_2"  [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_2\nQR_CARD"->"AUTH_2\nCARD"     [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "AUTH_2\nQR_CARD"->"AUTH_2\nQR"       [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "AUTH_2\nQR_CARD"->AUTH               [label="call\n1"];
+  "AUTH_2\nQR_CARD"->QR_CARD            [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "AUTH_1\nQR_2"->"UNSHIFT\nAUTH_1\nWAIT_2" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_1\nQR_2"->"AUTH_1\nWAIT_2"          [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "AUTH_1\nQR_2"->AUTH                      [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "AUTH_1\nQR_2"->QR_2                      [label="trans\n1"
+			style="dotted" penwidth=3];
+  "AUTH_1\nQR_2"->"AUTH_1\nQR"              [label="off\n2"
+			style="dashed"];
+
+
+  "AUTH_2\nQR_1"->"UNSHIFT\nAUTH_2\nWAIT_1" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_2\nQR_1"->"AUTH_2\nWAIT_1"          [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "AUTH_2\nQR_1"->AUTH                      [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "AUTH_2\nQR_1"->"AUTH_2\nQR"              [label="off\n1"
+			style="dashed"];
+  "AUTH_2\nQR_1"->QR_1                      [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "AUTH_1\nCARD_2"->"UNSHIFT\nAUTH_1\nWAIT_2" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_1\nCARD_2"->AUTH                      [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "AUTH_1\nCARD_2"->"AUTH_1\nWAIT_2"          [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "AUTH_1\nCARD_2"->CARD_2                    [label="trans\n1"
+			style="dotted" penwidth=3];
+  "AUTH_1\nCARD_2"->"AUTH_1\nCARD"            [label="off\n2"
+			style="dashed"];
+
+
+  "AUTH_2\nCARD_1"->"UNSHIFT\nAUTH_2\nWAIT_1" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  "AUTH_2\nCARD_1"->AUTH                      [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "AUTH_2\nCARD_1"->"AUTH_2\nWAIT_1"          [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "AUTH_2\nCARD_1"->"AUTH_2\nCARD"            [label="off\n1"
+			style="dashed"];
+  "AUTH_2\nCARD_1"->CARD_1                    [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  AUTH->"UNSHIFT\nAUTH" [label="opr\noff"
+			color="#e41a1c" fontcolor="#e41a1c" style="dashed"];
+  AUTH->AUTH_2          [label="trans\n1"
+			style="dotted" penwidth=3];
+  AUTH->AUTH_1          [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "UNSHIFT\nQR"->QR                 [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nQR"->BLANK              [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nQR"->"UNSHIFT\nQR_CARD" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nQR"->"UNSHIFT\nQR_1"    [label="call\n1"];
+  "UNSHIFT\nQR"->"UNSHIFT\nQR_2"    [label="call\n2"];
+
+
+  "UNSHIFT\nCARD"->CARD               [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nCARD"->"UNSHIFT\nQR_CARD" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nCARD"->BLANK              [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nCARD"->"UNSHIFT\nCARD_1"  [label="call\n1"];
+  "UNSHIFT\nCARD"->"UNSHIFT\nCARD_2"  [label="call\n2"];
+
+
+  "UNSHIFT\nWAIT_1"->WAIT_1             [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nWAIT_1"->"UNSHIFT\nQR_1"    [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nWAIT_1"->"UNSHIFT\nCARD_1"  [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nWAIT_1"->BLANK              [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nWAIT_1"->"UNSHIFT\nWAIT"    [label="call\n2"];
+
+
+  "UNSHIFT\nWAIT_2"->WAIT_2             [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nWAIT_2"->"UNSHIFT\nQR_2"    [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nWAIT_2"->"UNSHIFT\nCARD_2"  [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nWAIT_2"->"UNSHIFT\nWAIT"    [label="call\n1"];
+  "UNSHIFT\nWAIT_2"->BLANK              [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nQR_CARD"->QR_CARD               [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nQR_CARD"->"UNSHIFT\nCARD"       [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nQR_CARD"->"UNSHIFT\nQR"         [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nQR_CARD"->"UNSHIFT\nQR_CARD_1"  [label="call\n1"];
+  "UNSHIFT\nQR_CARD"->"UNSHIFT\nQR_CARD_2"  [label="call\n2"];
+
+
+  "UNSHIFT\nWAIT"->WAIT                 [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nWAIT"->"UNSHIFT\nQR_BOTH"   [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nWAIT"->"UNSHIFT\nCARD_BOTH" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nWAIT"->"UNSHIFT\nWAIT_2"    [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nWAIT"->"UNSHIFT\nWAIT_1"    [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nQR_1"->QR_1                 [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nQR_1"->"UNSHIFT\nWAIT_1"    [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nQR_1"->"UNSHIFT\nQR_CARD_1" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nQR_1"->"UNSHIFT\nQR"        [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nQR_1"->"UNSHIFT\nQR_BOTH"   [label="call\n2"];
+
+
+  "UNSHIFT\nQR_2"->QR_2                 [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nQR_2"->"UNSHIFT\nWAIT_2"    [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nQR_2"->"UNSHIFT\nQR_CARD_2" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nQR_2"->"UNSHIFT\nQR_BOTH"   [label="call\n1"];
+  "UNSHIFT\nQR_2"->"UNSHIFT\nQR"        [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nCARD_1"->CARD_1               [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nCARD_1"->"UNSHIFT\nQR_CARD_1" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nCARD_1"->"UNSHIFT\nWAIT_1"    [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nCARD_1"->"UNSHIFT\nCARD"      [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nCARD_1"->"UNSHIFT\nCARD_BOTH" [label="call\n2"];
+
+
+  "UNSHIFT\nCARD_2"->CARD_2               [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nCARD_2"->"UNSHIFT\nQR_CARD_2" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nCARD_2"->"UNSHIFT\nWAIT_2"    [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nCARD_2"->"UNSHIFT\nCARD_BOTH" [label="call\n1"];
+  "UNSHIFT\nCARD_2"->"UNSHIFT\nCARD"      [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nQR_CARD_1"->AUTH_1                  [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nQR_CARD_1"->"UNSHIFT\nCARD_1"       [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nQR_CARD_1"->"UNSHIFT\nQR_1"         [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nQR_CARD_1"->"UNSHIFT\nQR_CARD"      [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nQR_CARD_1"->"UNSHIFT\nQR_CARD_BOTH" [label="call\n2"];
+
+
+  "UNSHIFT\nQR_CARD_2"->AUTH_2                  [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nQR_CARD_2"->"UNSHIFT\nCARD_2"       [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nQR_CARD_2"->"UNSHIFT\nQR_2"         [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nQR_CARD_2"->"UNSHIFT\nQR_CARD_BOTH" [label="call\n1"];
+  "UNSHIFT\nQR_CARD_2"->"UNSHIFT\nQR_CARD"      [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nQR_BOTH"->QR_BOTH                 [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nQR_BOTH"->"UNSHIFT\nWAIT"         [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nQR_BOTH"->"UNSHIFT\nQR_CARD_BOTH" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nQR_BOTH"->"UNSHIFT\nQR_2"         [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nQR_BOTH"->"UNSHIFT\nQR_1"         [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nCARD_BOTH"->CARD_BOTH               [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nCARD_BOTH"->"UNSHIFT\nQR_CARD_BOTH" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nCARD_BOTH"->"UNSHIFT\nWAIT"         [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nCARD_BOTH"->"UNSHIFT\nCARD_1"       [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nCARD_BOTH"->"UNSHIFT\nCARD_1"       [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nQR_CARD_BOTH"->"AUTH_1\nWAIT_2"     [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nQR_CARD_BOTH"->"UNSHIFT\nCARD_BOTH" [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nQR_CARD_BOTH"->"UNSHIFT\nQR_BOTH"   [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nQR_CARD_BOTH"->"UNSHIFT\nQR_CARD_1" [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nQR_CARD_BOTH"->"UNSHIFT\nQR_CARD_2" [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nAUTH"->AUTH               [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH"->"UNSHIFT\nAUTH_2"  [label="trans\n1"
+			style="dotted" penwidth=3];
+  "UNSHIFT\nAUTH"->"UNSHIFT\nAUTH_1"  [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "UNSHIFT\nAUTH_1"->AUTH_1                     [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_1"->"UNSHIFT\nAUTH_1\nQR"      [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nAUTH_1"->"UNSHIFT\nAUTH_1\nCARD"    [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nAUTH_1"->BLANK                      [label="trans\n1"
+			style="dotted" penwidth=3];
+  "UNSHIFT\nAUTH_1"->"UNSHIFT\nAUTH_1\nWAIT_2"  [label="call\n2"];
+
+
+  "UNSHIFT\nAUTH_2"->AUTH_2                     [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_2"->"UNSHIFT\nAUTH_2\nQR"      [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nAUTH_2"->"UNSHIFT\nAUTH_2\nCARD"    [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nAUTH_2"->"UNSHIFT\nAUTH_2\nWAIT_1"  [label="call\n1"];
+  "UNSHIFT\nAUTH_2"->BLANK                      [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "UNSHIFT\nAUTH_1\nQR"->"AUTH_1\nQR"               [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_1\nQR"->"UNSHIFT\nAUTH_1"          [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nAUTH_1\nQR"->"UNSHIFT\nAUTH_1\nQR_CARD" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nAUTH_1\nQR"->"UNSHIFT\nQR"              [label="trans\n1"
+			style="dotted" penwidth=3];
+  "UNSHIFT\nAUTH_1\nQR"->"UNSHIFT\nAUTH_1\nQR_2"    [label="call\n2"];
+
+
+  "UNSHIFT\nAUTH_2\nQR"->"AUTH_2\nQR"               [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_2\nQR"->"UNSHIFT\nAUTH_2"          [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nAUTH_2\nQR"->"UNSHIFT\nAUTH_2\nQR_CARD" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nAUTH_2\nQR"->"UNSHIFT\nAUTH_2\nQR_1"    [label="call\n1"];
+  "UNSHIFT\nAUTH_2\nQR"->"UNSHIFT\nQR"              [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "UNSHIFT\nAUTH_1\nCARD"->"AUTH_1\nCARD"             [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_1\nCARD"->"UNSHIFT\nAUTH_1\nQR_CARD" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nAUTH_1\nCARD"->"UNSHIFT\nAUTH_1"          [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nAUTH_1\nCARD"->"UNSHIFT\nCARD"            [label="trans\n1"
+			style="dotted" penwidth=3];
+  "UNSHIFT\nAUTH_1\nCARD"->"UNSHIFT\nAUTH_1\nCARD_2"  [label="call\n2"];
+
+
+  "UNSHIFT\nAUTH_2\nCARD"->"AUTH_2\nCARD"             [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_2\nCARD"->"UNSHIFT\nAUTH_2\nQR_CARD" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nAUTH_2\nCARD"->"UNSHIFT\nAUTH_2"          [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nAUTH_2\nCARD"->"UNSHIFT\nAUTH_2\nCARD_1"  [label="call\n1"];
+  "UNSHIFT\nAUTH_2\nCARD"->"UNSHIFT\nCARD"            [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "UNSHIFT\nAUTH_1\nWAIT_2"->"AUTH_1\nWAIT_2"           [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_1\nWAIT_2"->"UNSHIFT\nAUTH_1\nQR_2"    [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nAUTH_1\nWAIT_2"->"UNSHIFT\nAUTH_1\nCARD_2"  [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nAUTH_1\nWAIT_2"->"UNSHIFT\nWAIT_2"          [label="trans\n1"
+			style="dotted" penwidth=3];
+  "UNSHIFT\nAUTH_1\nWAIT_2"->AUTH_1                     [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nAUTH_2\nWAIT_1"->"AUTH_2\nWAIT_1"           [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_2\nWAIT_1"->"UNSHIFT\nAUTH_2\nQR_1"    [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nAUTH_2\nWAIT_1"->"UNSHIFT\nAUTH_2\nCARD_1"  [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nAUTH_2\nWAIT_1"->AUTH_2                     [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nAUTH_2\nWAIT_1"->"UNSHIFT\nWAIT_1"          [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "UNSHIFT\nAUTH_1\nQR_2"->"AUTH_1\nQR_2"               [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_1\nQR_2"->"UNSHIFT\nAUTH_1\nWAIT_2"    [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nAUTH_1\nQR_2"->"UNSHIFT\nAUTH_1\nQR_CARD_2" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nAUTH_1\nQR_2"->"UNSHIFT\nQR_2"              [label="trans\n1"
+			style="dotted" penwidth=3];
+  "UNSHIFT\nAUTH_1\nQR_2"->"UNSHIFT\nAUTH_1\nQR"        [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nAUTH_2\nQR_1"->"AUTH_2\nQR_1"               [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_2\nQR_1"->"UNSHIFT\nAUTH_2\nWAIT_1"    [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nAUTH_2\nQR_1"->"UNSHIFT\nAUTH_2\nQR_CARD_1" [label="usr\non"
+			color="#04672b" fontcolor="#04672b"];
+  "UNSHIFT\nAUTH_2\nQR_1"->"UNSHIFT\nAUTH_2\nQR"        [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nAUTH_2\nQR_1"->"UNSHIFT\nQR_1"              [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "UNSHIFT\nAUTH_1\nCARD_2"->"AUTH_1\nCARD_2"             [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_1\nCARD_2"->"UNSHIFT\nAUTH_1\nQR_CARD_2" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nAUTH_1\nCARD_2"->"UNSHIFT\nAUTH_1\nWAIT_2"    [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nAUTH_1\nCARD_2"->"UNSHIFT\nCARD_2"            [label="trans\n1"
+			style="dotted" penwidth=3];
+  "UNSHIFT\nAUTH_1\nCARD_2"->"UNSHIFT\nAUTH_1\nCARD"      [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nAUTH_2\nCARD_1"->"AUTH_2\nCARD_1"             [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_2\nCARD_1"->"UNSHIFT\nAUTH_2\nQR_CARD_1" [label="scan\non"
+			color="blue" fontcolor="blue"];
+  "UNSHIFT\nAUTH_2\nCARD_1"->"UNSHIFT\nAUTH_2\nWAIT_1"    [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nAUTH_2\nCARD_1"->"UNSHIFT\nAUTH_2\nCARD"      [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nAUTH_2\nCARD_1"->"UNSHIFT\nCARD_1"            [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "UNSHIFT\nAUTH_1\nQR_CARD"->"AUTH_1\nQR_CARD"             [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_1\nQR_CARD"->"UNSHIFT\nAUTH_1\nCARD"       [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nAUTH_1\nQR_CARD"->"UNSHIFT\nAUTH_1\nQR"         [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nAUTH_1\nQR_CARD"->"UNSHIFT\nQR_CARD"            [label="trans\n1"
+			style="dotted" penwidth=3];
+  "UNSHIFT\nAUTH_1\nQR_CARD"->"UNSHIFT\nAUTH_1\nQR_CARD_2"  [label="call\n2"];
+
+
+  "UNSHIFT\nAUTH_2\nQR_CARD"->"AUTH_2\nQR_CARD"             [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_2\nQR_CARD"->"UNSHIFT\nAUTH_2\nCARD"       [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nAUTH_2\nQR_CARD"->"UNSHIFT\nAUTH_2\nQR"         [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nAUTH_2\nQR_CARD"->"UNSHIFT\nAUTH_2\nQR_CARD_1"  [label="call\n1"];
+  "UNSHIFT\nAUTH_2\nQR_CARD"->"UNSHIFT\nQR_CARD"            [label="trans\n2"
+			style="dotted" penwidth=3];
+
+
+  "UNSHIFT\nAUTH_1\nQR_CARD_2"->AUTH                        [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_1\nQR_CARD_2"->"UNSHIFT\nAUTH_1\nCARD_2"   [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nAUTH_1\nQR_CARD_2"->"UNSHIFT\nAUTH_1\nQR_2"     [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nAUTH_1\nQR_CARD_2"->"UNSHIFT\nQR_CARD_2"        [label="trans\n1"
+			style="dotted" penwidth=3];
+  "UNSHIFT\nAUTH_1\nQR_CARD_2"->"UNSHIFT\nAUTH_1\nQR_CARD"  [label="off\n2"
+			style="dashed"];
+
+
+  "UNSHIFT\nAUTH_2\nQR_CARD_1"->AUTH                        [label="opr\non"
+			color="#e41a1c" fontcolor="#e41a1c"];
+  "UNSHIFT\nAUTH_2\nQR_CARD_1"->"UNSHIFT\nAUTH_2\nCARD_1"   [label="scan\noff"
+			color="blue" fontcolor="blue" style="dashed"];
+  "UNSHIFT\nAUTH_2\nQR_CARD_1"->"UNSHIFT\nAUTH_2\nQR_1"     [label="usr\noff"
+			color="#04672b" fontcolor="#04672b" style="dashed"];
+  "UNSHIFT\nAUTH_2\nQR_CARD_1"->"UNSHIFT\nAUTH_2\nQR_CARD"  [label="off\n1"
+			style="dashed"];
+  "UNSHIFT\nAUTH_2\nQR_CARD_1"->"UNSHIFT\nQR_CARD_1"        [label="trans\n2"
+			style="dotted" penwidth=3];
+}
